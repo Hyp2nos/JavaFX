@@ -1,6 +1,8 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -32,13 +34,21 @@ public class Main extends Application {
 			nom.setPadding(new Insets(10,0,0,0));
 			
 			VBox vBox1 = new VBox();
-			ListView<String> listView1 = new ListView<String>();
-			listView1.getItems().addAll("Orange","Pommes");
+			ObservableList<String> observableList = FXCollections.observableArrayList();
+			ListView<String> listView1 = new ListView<String>(observableList);
+			//listView1.getItems().addAll("Orange","Pommes");
+			observableList.addAll("Orange","Pommes");
 			vBox1.getChildren().add(listView1);
 			root.setCenter(vBox1);
 			
 			root.setTop(hbox1);
 			primaryStage.show();
+			
+			
+			btn.setOnAction((e)->{
+				String nomList =textNom.getText();
+				listView1.getItems().add(nomList);
+			});
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
